@@ -8,9 +8,6 @@ export default function TaskStatusSelect({ columns, watchedStatus, setValue, sel
   
   return (
     <div>
-      <label className="text-sm font-bold text-[var(--color-info)] dark:text-[var(--color-info-light)]">
-        Status
-      </label>
       <select
         value={watchedStatus || ''}
         onChange={(e) => setValue('status', e.target.value)}

@@ -156,7 +156,7 @@ export default function BoardBody() {
           </div>
         </div>
       ))}
-      <div className="flex items-center justify-center min-w-[280px] bg-gray-100 dark:bg-[var(--color-surface)] rounded-lg hover:cursor-pointer flex-shrink-0">
+      <div className="flex items-center justify-center min-w-[280px] bg-gray-100 dark:bg-[var(--color-surface)] rounded-lg hover:cursor-pointer flex-shrink-0 shadow-none">
         <Button
           className="rounded-full font-bold text-base px-6 py-3 transition-colors text-gray-500 bg-transparent hover:bg-transparent shadow-none"
           onClick={handleAddColumn}

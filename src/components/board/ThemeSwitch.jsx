@@ -18,7 +18,7 @@ export default function ThemeSwitch({ theme, onThemeChange }) {
   };
 
   return (
-    <div className="flex items-center gap-2 justify-center mb-2">
+    <div className="flex items-center gap-2 justify-center mb-2 bg-[var(--color-bg-dark)] dark:bg-[var(--color-very-dark-grey)] p-3 rounded-md">
       <Sun className="w-4 h-4 text-yellow-400" />
       <Switch
         checked={theme === 'dark'}

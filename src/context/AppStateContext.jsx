@@ -1,4 +1,5 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
+import { fetchBoardDetails } from '../services/board';
 
 const AppStateContext = createContext(undefined);
 
@@ -8,6 +9,7 @@ export const AppStateProvider = ({ children }) => {
   const [theme, setTheme] = useState("light");
   const [columns, setColumns] = useState([]);
   const [boards, setBoards] = useState([]);
+  const [selectedBoard, setSelectedBoard] = useState(null);
 
   // Theme effect
   useEffect(() => {
@@ -17,6 +19,25 @@ export const AppStateProvider = ({ children }) => {
       document.documentElement.classList.remove("dark");
     }
   }, [theme]);
+
+  // Fetch board details when selectedBoardId changes
+  useEffect(() => {
+    const loadBoardDetails = async () => {
+      if (selectedBoardId) {
+        try {
+          const boardDetails = await fetchBoardDetails(selectedBoardId);
+          setSelectedBoard(boardDetails);
+        } catch (error) {
+          console.error('Error loading board details:', error);
+          setSelectedBoard(null);
+        }
+      } else {
+        setSelectedBoard(null);
+      }
+    };
+
+    loadBoardDetails();
+  }, [selectedBoardId]);
 
   const handleSelectBoard = (id) => {
     setSelectedBoardId(id);
@@ -35,6 +56,7 @@ export const AppStateProvider = ({ children }) => {
         theme,
         columns,
         boards,
+        selectedBoard,
         setSelectedBoardId,
         setSidebarOpen,
         setTheme,

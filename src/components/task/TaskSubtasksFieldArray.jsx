@@ -39,10 +39,9 @@ export default function TaskSubtasksFieldArray({ fields, append, remove, registe
       </div>
       <Button 
         type="button" 
-        variant="ghost" 
         onClick={() => append({ title: "", isCompleted: false })} 
         disabled={fields.length >= 10}
-        className="mt-4 text-[var(--color-primary)] dark:text-[var(--color-primary-light)]"
+        className="w-full mt-4 rounded-full bg-white dark:bg-white text-[var(--color-primary)] hover:bg-[var(--color-primary)] hover:text-white transition-colors"
       >
         <PlusIcon className="mr-2 h-4 w-4"/> Add New Subtask
       </Button>

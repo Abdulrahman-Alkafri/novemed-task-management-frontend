@@ -5,6 +5,7 @@ import { useBoards } from "../hooks/boardHooks";
 import BoardList from "./board/BoardList";
 import SidebarControls from "./board/SidebarControls";
 import BoardSkeleton from "./board/BoardSkeleton";
+import ThemeSwitch from "./board/ThemeSwitch";
 
 export default function Sidebar() {
   const { selectedBoardId, handleSelectBoard, onCreateBoard, sidebarOpen, setSidebarOpen, theme, setTheme } = useAppState();
@@ -25,8 +26,6 @@ export default function Sidebar() {
           <BoardSkeleton />
         </div>
         <SidebarControls 
-          theme={theme} 
-          onThemeChange={setTheme} 
           onHideSidebar={() => setSidebarOpen(false)} 
         />
       </aside>
@@ -42,8 +41,6 @@ export default function Sidebar() {
           </div>
         </div>
         <SidebarControls 
-          theme={theme} 
-          onThemeChange={setTheme} 
           onHideSidebar={() => setSidebarOpen(false)} 
         />
       </aside>
@@ -57,6 +54,7 @@ export default function Sidebar() {
         className={`transition-all duration-200 overflow-hidden border-r relative flex flex-col justify-between flex-shrink-0
           ${sidebarOpen ? 'w-[260px]' : 'w-0'}
           bg-[var(--color-bg)] dark:bg-[var(--color-bg-alt)] border-[var(--color-info-light)] dark:border-[var(--color-info)]
+          hidden md:flex
         `}
       >
         <div>{/* Logo for sidebar */}
@@ -73,16 +71,17 @@ export default function Sidebar() {
             onCreateBoard={onCreateBoard}
           />
         </div>
-        <SidebarControls 
-          theme={theme} 
-          onThemeChange={setTheme} 
-          onHideSidebar={() => setSidebarOpen(false)} 
-        />
+        <div>
+          <ThemeSwitch theme={theme} onThemeChange={setTheme} />
+          <SidebarControls 
+            onHideSidebar={() => setSidebarOpen(false)} 
+            />
+        </div>
       </aside>
       {/* Show Sidebar Button */}
       {!sidebarOpen && (
         <button
-          className="fixed bottom-8 left-0 bg-[var(--color-primary)] dark:bg-[var(--color-primary)] text-white p-4 rounded-r-full hover:bg-[var(--button-bg-hover)] transition-colors"
+          className="fixed bottom-4 left-0 bg-[var(--color-primary)] dark:bg-[var(--color-primary)] text-white p-4 rounded-r-full hover:bg-[var(--button-bg-hover)] transition-colors z-50"
           onClick={() => setSidebarOpen(true)}
         >
           <ChevronsRight className="w-4 h-4" />

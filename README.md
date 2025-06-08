@@ -122,6 +122,26 @@ The application includes Docker configuration for containerized deployment:
 - `Dockerfile` for building the application
 - `nginx.conf` for production server configuration
 
+### Docker Deployment
+
+1. **Build the Docker image**
+   ```bash
+   docker build -t kanban-board .
+   ```
+
+2. **Run the container**
+   ```bash
+   docker run -d -p 3000:3000 --name kanban-app kanban-board
+   ```
+
+The application will be available at `http://localhost:3000`
+
+To stop and remove the container:
+```bash
+docker stop kanban-app
+docker rm kanban-app
+```
+
 ## 📱 Responsive Design
 
 The application is fully responsive and works seamlessly across:

@@ -2,7 +2,7 @@ import { Button } from "./ui/button";
 import { Dialog, DialogTrigger, DialogContent, DialogHeader, DialogTitle, DialogDescription, DialogFooter } from "./ui/dialog";
 import { Input } from "./ui/input";
 import { useForm, useFieldArray } from "react-hook-form";
-import { Grid2x2PlusIcon, XIcon } from "lucide-react";
+import { XIcon } from "lucide-react";
 import { useState } from "react";
 import { useCreateBoard } from "../hooks/boardHooks";
 import { useAppState } from "../context/AppStateContext";
@@ -55,7 +55,7 @@ export default function AddBoardDialog({ trigger }) {
   return (
     <Dialog open={isOpen} onOpenChange={handleOpenChange}>
       <DialogTrigger asChild>{trigger}</DialogTrigger>
-      <DialogContent className="bg-[var(--color-bg)] dark:bg-[var(--color-bg-alt)]">
+      <DialogContent className="bg-[var(--color-bg)] dark:bg-[var(--color-bg-alt)] w-4/5 mx-auto md:w-full">
         <DialogHeader>
           <DialogTitle className="text-xl font-bold text-[var(--color-text)] dark:text-[var(--color-white)]">Add New Board</DialogTitle>
           <DialogDescription className="text-[var(--color-info)] dark:text-[var(--color-info-light)]">

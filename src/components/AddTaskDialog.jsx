@@ -154,7 +154,7 @@ export default function AddTaskDialog({ trigger }) {
         {/* Render the trigger button passed as prop */}
         {trigger}
       </DialogTrigger>
-      <DialogContent className="bg-[var(--color-bg)] dark:bg-[var(--color-bg-alt)]">
+      <DialogContent className="bg-[var(--color-bg)] dark:bg-[var(--color-bg-alt)] p-6 rounded-lg shadow-lg max-w-md w-full">
         <DialogHeader>
           <DialogTitle>Add New Task</DialogTitle>
           <DialogDescription className="text-[var(--color-info)] dark:text-[var(--color-info-light)]">

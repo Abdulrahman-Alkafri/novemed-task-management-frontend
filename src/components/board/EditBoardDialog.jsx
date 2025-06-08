@@ -78,7 +78,7 @@ const EditBoardDialog = ({ boardId, isOpen, onClose }) => {
 
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
-      <DialogContent className="dark:bg-[var(--color-bg-alt)]">
+      <DialogContent className="dark:bg-[var(--color-bg-alt)] w-4/5 mx-auto md:w-full">
         <DialogHeader>
           <DialogTitle>Edit Board</DialogTitle>
         </DialogHeader>

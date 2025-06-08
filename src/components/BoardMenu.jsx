@@ -10,8 +10,9 @@ import {
 import DeleteBoardDialog from "./DeleteBoardDialog";
 import EditBoardDialog from "./board/EditBoardDialog";
 import { useAppState } from "../context/AppStateContext";
+import { Trash2, Edit } from "lucide-react";
 
-export default function BoardMenu() {
+export default function BoardMenu({ disabled }) {
   const { selectedBoardId } = useAppState();
 
   const [isEditDialogOpen, setIsEditDialogOpen] = useState(false);
@@ -36,7 +37,7 @@ export default function BoardMenu() {
   return (
     <div className="flex items-center space-x-2">
       <DropdownMenu>
-        <DropdownMenuTrigger asChild>
+        <DropdownMenuTrigger asChild disabled={disabled}>
           <Button variant="ghost" size="icon" className="h-8 w-8">
             <DotsVerticalIcon className="h-5 w-5 text-[var(--color-grey)] dark:text-[var(--color-white)]" />
           </Button>
@@ -45,14 +46,16 @@ export default function BoardMenu() {
           <DropdownMenuItem
             onClick={handleEditBoardClick}
             className="text-[var(--color-grey)] dark:text-[var(--color-grey-light)] cursor-pointer"
+            disabled={disabled}
           >
-            Edit Board
+            <Edit className="mr-2 h-4 w-4" /> Edit Board
           </DropdownMenuItem>
           <DropdownMenuItem
             onClick={handleDeleteBoardClick}
             className="text-[var(--color-accent)] cursor-pointer"
+            disabled={disabled}
           >
-            Delete Board
+            <Trash2 className="mr-2 h-4 w-4 text-[var(--color-accent)]" /> Delete Board
           </DropdownMenuItem>
         </DropdownMenuContent>
       </DropdownMenu>

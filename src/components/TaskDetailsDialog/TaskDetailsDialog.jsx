@@ -9,6 +9,8 @@ import { useTask } from "../../context/TaskContext";
 import { createPortal } from 'react-dom';
 import { useTaskDetails, useBoardColumns, useToggleSubtask, useDeleteTask } from "../../hooks/taskHooks";
 import { useQueryClient } from "@tanstack/react-query";
+import { Checkbox } from "../ui/checkbox";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "../ui/select";
 
 export default function TaskDetailsDialog() {
   const { selectedTaskId, isTaskDetailsDialogOpen, closeTaskDetailsDialog } = useTask();
@@ -81,9 +83,9 @@ export default function TaskDetailsDialog() {
   return createPortal(
     <>
       <Dialog open={isTaskDetailsDialogOpen} onOpenChange={closeTaskDetailsDialog}>
-        <DialogContent className="bg-[var(--color-bg)] dark:bg-[var(--color-bg-alt)] p-6 rounded-lg shadow-lg max-w-md w-full" showCloseButton={false}>
-          <DialogHeader className="flex flex-row justify-between items-center mb-6">
-            <DialogTitle className="text-xl font-bold text-[var(--color-text)] dark:text-[var(--color-white)]">
+        <DialogContent className="bg-[var(--color-bg)] dark:bg-[var(--color-bg-alt)] p-4 sm:p-6 rounded-lg shadow-lg max-w-md w-full" showCloseButton={false}>
+          <DialogHeader className="flex flex-row justify-between items-start sm:items-center gap-4 mb-4 sm:mb-6">
+            <DialogTitle className="text-lg sm:text-xl font-bold text-[var(--color-text)] dark:text-[var(--color-white)] break-words">
               {task.title}
             </DialogTitle>
             <DropdownMenu>
@@ -109,50 +111,58 @@ export default function TaskDetailsDialog() {
             </DropdownMenu>
           </DialogHeader>
 
-          <DialogDescription className="text-[var(--color-info-light)] mb-6 text-sm font-medium leading-6">
+          <DialogDescription className="text-[var(--color-info-light)] mb-4 sm:mb-6 text-sm sm:text-base font-medium leading-6 break-words">
             {task.description}
           </DialogDescription>
 
-          <div className="mb-6">
-            <h3 className="text-xs font-bold uppercase text-[var(--color-info-light)] mb-4">
-              Subtasks ({task.subtasks.filter(subtask => subtask.isCompleted).length} of {task.subtasks.length})
+          <div className="mb-4 sm:mb-6">
+            <h3 className="text-sm sm:text-base font-bold text-[var(--color-text)] dark:text-[var(--color-white)] mb-2 sm:mb-3">
+              Subtasks ({task.subtasks?.filter(st => st.isCompleted).length || 0} of {task.subtasks?.length || 0})
             </h3>
-            <div className="space-y-3">
-              {task.subtasks.map((subtask) => (
-                <div 
-                  key={subtask.id} 
-                  className="flex items-center space-x-3 p-3 bg-[var(--color-bg-alt)] dark:bg-[var(--color-bg)] rounded-lg cursor-pointer"
-                  onClick={() => handleToggleSubtaskCompletion(subtask.id, subtask.isCompleted, subtask.title)}
+            <div className="space-y-2 sm:space-y-3">
+              {task.subtasks?.map((subtask) => (
+                <div
+                  key={subtask.id}
+                  className="flex items-center gap-3 p-3 sm:p-4 bg-[var(--color-grey-light)] dark:bg-[var(--color-bg)] rounded-md"
                 >
-                  <input
-                    type="checkbox"
-                    id={`subtask-${subtask.id}`}
+                  <Checkbox
                     checked={subtask.isCompleted}
-                    onChange={() => {}}
-                    className="w-5 h-5 border-[var(--color-lines-dark)] rounded focus:ring-0 focus:ring-offset-0 accent-[var(--color-primary)]"
+                    onCheckedChange={() => handleToggleSubtaskCompletion(subtask.id, subtask.isCompleted, subtask.title)}
+                    className="border-[var(--color-lines-dark)] data-[state=checked]:bg-[var(--color-primary)] data-[state=checked]:border-[var(--color-primary)]"
                   />
-                  <label
-                    htmlFor={`subtask-${subtask.id}`}
-                    className={`text-sm font-medium leading-none cursor-pointer ${
-                      subtask.isCompleted 
-                        ? "line-through text-[var(--color-info-light)]" 
-                        : "text-[var(--color-text)] dark:text-[var(--color-white)]"
-                    }`}
-                  >
+                  <span className={`text-sm sm:text-base ${subtask.isCompleted ? 'line-through text-[var(--color-info)] dark:text-[var(--color-info-light)]' : 'text-[var(--color-text)] dark:text-[var(--color-white)]'}`}>
                     {subtask.title}
-                  </label>
+                  </span>
                 </div>
               ))}
             </div>
           </div>
 
           <div>
-            <h3 className="text-xs font-bold uppercase text-[var(--color-info-light)] mb-4">
+            <h3 className="text-sm sm:text-base font-bold text-[var(--color-text)] dark:text-[var(--color-white)] mb-2 sm:mb-3">
               Current Status
             </h3>
-            <p className="text-sm font-medium text-[var(--color-text)] dark:text-[var(--color-white)] capitalize">
-              {task.columnName || "Loading..."}
-            </p>
+            <Select
+              value={task.status}
+              onValueChange={(value) => {
+                // Handle status change
+              }}
+            >
+              <SelectTrigger className="w-full bg-[var(--color-bg)] dark:bg-[var(--color-dark-grey-dark)] border-[var(--color-lines-dark)] text-[var(--color-text)] dark:text-[var(--color-white)]">
+                <SelectValue placeholder="Select status" />
+              </SelectTrigger>
+              <SelectContent>
+                {columns.map((column) => (
+                  <SelectItem
+                    key={column.id}
+                    value={column.id}
+                    className="text-[var(--color-text)] dark:text-[var(--color-white)]"
+                  >
+                    {column.name}
+                  </SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
           </div>
         </DialogContent>
       </Dialog>

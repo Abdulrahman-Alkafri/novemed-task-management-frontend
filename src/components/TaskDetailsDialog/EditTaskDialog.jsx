@@ -137,7 +137,7 @@ export default function EditTaskDialog({ taskId, isOpen, onOpenChange, onTaskUpd
 
   return (
     <Dialog open={isOpen} onOpenChange={onOpenChange}>
-      <DialogContent className="bg-[var(--color-bg)] dark:bg-[var(--color-bg-alt)] p-6 rounded-lg shadow-lg max-w-md w-full">
+      <DialogContent className="bg-[var(--color-bg)] w-4/5 mx-auto md:w-full dark:bg-[var(--color-bg-alt)] p-6 rounded-lg shadow-lg">
         <DialogHeader className="mb-6">
           <DialogTitle className="text-xl font-bold text-[var(--color-text)] dark:text-[var(--color-white)]">
             Edit Task
