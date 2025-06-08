@@ -51,7 +51,6 @@ A modern, responsive Kanban board application built with React, featuring a beau
 - `@tanstack/react-query`: For data fetching and caching
 - `@radix-ui/*`: UI component primitives
 - `react-hook-form`: Form handling
-- `react-router-dom`: Routing
 - `lucide-react`: Icons
 - `tailwind-merge`: Utility for merging Tailwind classes
 
@@ -152,6 +151,3 @@ The application is fully responsive and works seamlessly across:
 4. Push to the branch (`git push origin feature/AmazingFeature`)
 5. Open a Pull Request
 
-## 📝 License
-
-This project is licensed under the MIT License - see the LICENSE file for details.
