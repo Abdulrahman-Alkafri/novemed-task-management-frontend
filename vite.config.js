@@ -6,7 +6,13 @@ import path from "path"
 export default defineConfig({
   plugins: [
     tailwindcss(),
-    react(),
+    react({
+      babel: {
+        plugins: [
+          ["babel-plugin-react-compiler"],
+        ],
+      },
+    }),
   ],
   resolve: {
     alias: {
