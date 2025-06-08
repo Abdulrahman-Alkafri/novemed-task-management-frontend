@@ -12,14 +12,12 @@ A modern, responsive Kanban board application built with React, featuring a beau
 - **Column Management**
   - Create, edit, and delete columns
   - Automatic column numbering (New 1, New 2, etc.)
-  - Drag and drop column reordering
   - Column color customization
 
 - **Task Management**
   - Create, edit, and delete tasks
   - Add subtasks with completion tracking
   - Task details modal
-  - Drag and drop task reordering
 
 - **Modern UI/UX**
   - Clean and intuitive interface
