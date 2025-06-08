@@ -131,8 +131,6 @@ The application is fully responsive and works seamlessly across:
 
 ## 🔒 Security
 
-- Environment variables for sensitive data
-- Secure API communication
 - Input validation and sanitization
 
 ## 🚀 Performance
