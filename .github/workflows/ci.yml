@@ -1,45 +1,15 @@
 name: React CI Pipeline
 
-on:
-  push:
-    branches:
-      - main
-  pull_request:
-    branches:
-      - main
+on: [push, pull_request]  # Triggers on all pushes/PRs
 
 jobs:
-  test_project:
+  test_and_build:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-
-      - name: Set up Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: 20 
-
-      - name: Install packages
-        run: npm install
-
-      - name: Run tests
-        run: npm test
-
-  build_project:
-    needs: test_project
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-
-      - name: Set up Node.js
-        uses: actions/setup-node@v4
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
         with:
           node-version: 20
-
-      - name: Install packages
-        run: npm install
-
-      - name: Build project
-        run: npm run build
+      - run: npm install
+      - run: npm test
+      - run: npm run build
